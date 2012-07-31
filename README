@@ -1,6 +1,10 @@
-To build anything, you need to fetch vcglib from svn by running
-"svn checkout https://vcg.svn.sourceforge.net/svnroot/vcg/trunk/vcglib vcglib" in this directory
+To build anything, you need to fetch the vcglib submodule with git submodule init && git submodule update
+
+Compiling stltools
 
 To build stltools create a folder outside this one called stltools-build or the like, go into it and run 
 "ccmake /path/to/meshcleaner/stltools" to generate Makefiles and then just build using make
 You can also open CMakeLists.txt for either project in Qt Creator if you want a IDE
+
+The main meshcleaner project is currently just a proof-of-concept prototype, it's functionality 
+will be moved to stltools eventually when it's working properly.
