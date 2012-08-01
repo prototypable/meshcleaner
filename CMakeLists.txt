@@ -1,6 +1,8 @@
 project(meshcleaner)
 cmake_minimum_required(VERSION 2.8)
 
+option(BUILD_REST_SERVER "Build the REST server" OFF)
+
 set(MESHCLEANER_SOURCES
     meshcleanerworker.hpp           meshcleanerworker.cpp
     mesh_definitions.hpp            mesh_definitions.cpp
@@ -21,7 +23,7 @@ set(MANIFOLDTEST_SOURCES
     manifoldtest.cpp
 )
 
-if (BUILD_REST_SERVER)
+if(BUILD_REST_SERVER)
     # Set these to configure what flavor of boost you want to find
     # Multithreaded is required
     set(Boost_USE_MULTITHREADED, ON)
