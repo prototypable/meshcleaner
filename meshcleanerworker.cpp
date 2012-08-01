@@ -77,6 +77,7 @@ void MeshcleanerWorker::GenerateTopology()
     vcg::tri::Clean<Mesh>::RemoveDuplicateFace(STL);
     vcg::tri::Clean<Mesh>::RemoveUnreferencedVertex(STL);
     vcg::tri::Clean<Mesh>::RemoveZeroAreaFace(STL);
+    vcg::tri::Clean<Mesh>::RemoveDegenerateFace(STL);
 
     vcg::tri::UpdateTopology<Mesh>::FaceFace(STL);
     TopologyGenerated = true;
