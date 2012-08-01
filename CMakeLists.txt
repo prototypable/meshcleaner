@@ -6,6 +6,7 @@ option(BUILD_REST_SERVER "Build the REST server" OFF)
 set(MESHCLEANER_SOURCES
     meshcleanerworker.hpp           meshcleanerworker.cpp
     mesh_definitions.hpp            mesh_definitions.cpp
+    meshcleaner.cpp
 )
 
 set(REST_SERVER_SOURCES
@@ -40,12 +41,11 @@ endif(BUILD_REST_SERVER)
 include_directories(.)
 include_directories(vcglib)
 
-#add_executable(meshcleaner ${MESHCLEANER_SOURCES})
-
 if (BUILD_REST_SERVER)
     add_executable(meshcleaner_rest_server ${REST_SERVER_SOURCES})
     target_link_libraries(meshcleaner_rest_server json ${Boost_LIBRARIES})
 endif(BUILD_REST_SERVER)
 
+add_executable(meshcleaner ${MESHCLEANER_SOURCES})
 add_executable(stlconvert ${STLCONVERT_SOURCES})
 add_executable(manifoldtest ${MANIFOLDTEST_SOURCES})
