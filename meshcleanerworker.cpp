@@ -89,6 +89,6 @@ void MeshcleanerWorker::Clean()
     // Cleanout non-manifold faces and vertices, if any is removed, rebuild topology after
     if (vcg::tri::Clean<Mesh>::RemoveNonManifoldFace(STL) > 0)
         vcg::tri::UpdateTopology<Mesh>::FaceFace(STL);
-    if (vcg::tri::Clean<Mesh>::RemoveNonManifoldVertex(Mesh) > 0)
+    if (vcg::tri::Clean<Mesh>::RemoveNonManifoldVertex(STL) > 0)
         vcg::tri::UpdateTopology<Mesh>::FaceFace(STL);
 }
