@@ -10,9 +10,7 @@
 #include <wrap/io_trimesh/export_stl.h>
 #include <vcg/complex/algorithms/clean.h>
 #include <vcg/complex/algorithms/update/topology.h>
-//#include <vcg
 
-using namespace std;
 
 using boost::asio::ip::tcp;
 
