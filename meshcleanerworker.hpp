@@ -22,7 +22,7 @@ public:
     // Get the last error
     const std::string & GetError() const { return ErrorDescription; }
 
-    bool IsManifold() const;
+    bool IsManifold();
 
     void GenerateTopology();
 
