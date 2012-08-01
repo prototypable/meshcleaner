@@ -9,8 +9,6 @@
 #include <vcg/simplex/face/component.h>
 
 #include <vcg/complex/complex.h>
-#include <wrap/io_trimesh/io_mask.h>
-#include <wrap/io_trimesh/import_stl.h>
 
 class Vertex;
 class Face;
