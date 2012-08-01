@@ -1,0 +1,3 @@
+This is jsoncpp-0.6.0-rc2 from http://sf.net/projects/jsoncpp/
+I couln't get scons to cooperate and to keep the external dependecies down, I included this in tree
+See lib_json/LICENSE for the json-cpp license(PD/MIT)
