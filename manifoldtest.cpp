@@ -41,13 +41,8 @@ int main(int argc, char * argv[])
     // Perform the actual check
     int NonManifoldEdges = vcg::tri::Clean<Mesh>::CountNonManifoldEdgeFF(stl);
     int NonManifoldVertices = vcg::tri::Clean<Mesh>::CountNonManifoldVertexFF(stl);
-    if (NonManifoldEdges != 0 && NonManifoldVertices != 0)
-        return 3;
-    else if (NonManifoldEdges != 0)
-        return 2;
-    else if (NonManifoldVertices != 0)
-        return 1;
-    else
-        return 0;
+
+    std::cout << "Model has " << NonManifoldEdges << " non-manifold edges and "
+              << NonManifoldVertices << " non-manifold vertices" << std::endl;
 
 }
