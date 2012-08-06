@@ -44,7 +44,7 @@ int main(int argc, char * argv[])
     // Generate face to face topology data for manifoldness detection
     vcg::tri::UpdateTopology<Mesh>::FaceFace(stl);
 
-    // Perform the actual check
+    // Perform the actual checking
     int NonManifoldEdges = vcg::tri::Clean<Mesh>::CountNonManifoldEdgeFF(stl);
     int NonManifoldVertices = vcg::tri::Clean<Mesh>::CountNonManifoldVertexFF(stl);
 
