@@ -9,6 +9,12 @@
 // Mesh cleanup algorithms
 #include <vcg/complex/algorithms/clean.h>
 
+enum errorcodes {
+    ERROR_NONMANIFOLD_EDGE = 2,
+    ERROR_HOLES = 4,
+    ERROR_SELF_INTERSECT = 8
+};
+
 int main(int argc, char * argv[])
 {
     if(argc != 2)
