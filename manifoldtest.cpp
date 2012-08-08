@@ -32,8 +32,10 @@ int main(int argc, char * argv[])
     bool quietmode = getoption(argc, argv, "-q");
     if((!quietmode && argc != 2) || (argc != 3 && quietmode))
     {
-        std::cerr << "Usage: manifoldtest file.stl\n"
-                     "Tests for and prints a number of problems that's known to cause problems with slicing" << std::endl;
+        std::cerr << "Usage:\nmanifoldtest file.stl\n"
+                  << "OR \"manifoldtest -q file.stl\" and return status will be 0 if OK or a bitmask of any errors found\n"
+                  << "Non-manifold edge = 1, Hole in mesh = 4, Self-intersections = 8\n"
+                  << "manifoldtest tests for and prints a number of problems that's known to cause problems with slicing" << std::endl;
         return -1;
     }
 
@@ -67,7 +69,7 @@ int main(int argc, char * argv[])
     int NonManifoldVertices = vcg::tri::Clean<Mesh>::CountNonManifoldVertexFF(stl);
     int Holes = 0;
     if (NonManifoldEdges == 0) Holes = vcg::tri::Clean<Mesh>::CountHoles(stl);
-    else
+    else if (!quietmode)
         std::cout << "Hole detection skipped, mesh is not manifold\n";
     std::vector<Mesh::FaceType *> SelfIntersectList;
     stl.face.EnableMark();
