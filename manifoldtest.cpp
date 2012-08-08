@@ -47,8 +47,15 @@ int main(int argc, char * argv[])
     // Perform the actual checking
     int NonManifoldEdges = vcg::tri::Clean<Mesh>::CountNonManifoldEdgeFF(stl);
     int NonManifoldVertices = vcg::tri::Clean<Mesh>::CountNonManifoldVertexFF(stl);
+    int Holes = vcg::tri::Clean<Mesh>::CountHoles(stl);
+    std::vector<Mesh::FaceType *> SelfIntersectList;
+    stl.face.EnableMark();
+    vcg::tri::Clean<Mesh>::SelfIntersections(stl, SelfIntersectList);
+    int SelfIntersections = SelfIntersectList.size();
 
     std::cout << "Model has " << NonManifoldEdges << " non-manifold edges and "
               << NonManifoldVertices << " non-manifold vertices" << std::endl;
+    std::cout << SelfIntersections << " self-intersecting faces and "
+              << Holes << " holes" << std::endl;
 
 }
