@@ -20,7 +20,7 @@ int main(int argc, char * argv[])
     if(argc != 2)
     {
         std::cerr << "Usage: manifoldtest file.stl\n"
-                     "Return value is 0 if OK, 1 non-manifold vertex found, 2 non-manifold edge found, 3 if both, -1 for file not found/loading error" << std::endl;
+                     "Tests for and prints a number of problems that's known to cause problems with slicing" << std::endl;
         return -1;
     }
 
