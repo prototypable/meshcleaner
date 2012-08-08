@@ -51,6 +51,7 @@ int main(int argc, char * argv[])
     std::vector<Mesh::FaceType *> SelfIntersectList;
     stl.face.EnableMark();
     vcg::tri::Clean<Mesh>::SelfIntersections(stl, SelfIntersectList);
+    stl.face.DisableMark();
     int SelfIntersections = SelfIntersectList.size();
 
     std::cout << "Model has " << NonManifoldEdges << " non-manifold edges and "
