@@ -8,6 +8,8 @@
 #include <vcg/complex/algorithms/clean.h>
 #include <vcg/complex/algorithms/update/topology.h>
 #include <vcg/complex/append.h>
+#include <vcg/complex/algorithms/hole.h>
+#include<vcg/space/triangle3.h>
 
 MeshcleanerWorker::MeshcleanerWorker()
 {
@@ -92,4 +94,24 @@ void MeshcleanerWorker::Clean()
         vcg::tri::UpdateTopology<Mesh>::FaceFace(STL);
     if (vcg::tri::Clean<Mesh>::RemoveNonManifoldVertex(STL) > 0)
         vcg::tri::UpdateTopology<Mesh>::FaceFace(STL);
+
+    STL.face.EnableMark();
+    std::vector<Face *> SelfIntersectingFaces;
+    vcg::tri::Clean<Mesh>::SelfIntersections(STL, SelfIntersectingFaces);
+    if (SelfIntersectingFaces.size() == 0)
+        return;
+    std::cout << SelfIntersectingFaces.size() << " Self-intersections found, attempting repair" << std::endl;
+    for(std::vector<Face *>::iterator it = SelfIntersectingFaces.begin(); it != SelfIntersectingFaces.end(); ++it)
+    {
+        if (! (*it)->IsD())
+            vcg::tri::Allocator<Mesh>::DeleteFace(STL, *(*it));
+    }
+    vcg::tri::Allocator<Mesh>::CompactFaceVector(STL);
+    SelfIntersectingFaces.clear();
+    vcg::tri::Clean<Mesh>::SelfIntersections(STL, SelfIntersectingFaces);
+    std::cout << SelfIntersectingFaces.size() << " Selfintersections remain after deletion\n";
+    std::cout << "Filling in the holes, currently have " << vcg::tri::Clean<Mesh>::CountHoles(STL) << " holes" << std::endl;
+    vcg::tri::Hole<Mesh>::EarCuttingFill< vcg::tri::TrivialEar<Mesh> >(STL, 50, false);
+    vcg::tri::UpdateTopology<Mesh>::FaceFace(STL);
+    std::cout << vcg::tri::Clean<Mesh>::CountHoles(STL) << " holes remain after removal of self-intersecting faces and re-fill\n";
 }
